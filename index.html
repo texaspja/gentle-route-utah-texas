@@ -134,14 +134,36 @@ ol.hardlist li{display:grid;grid-template-columns:22px 1fr auto;gap:4px 10px;ali
 .hname{font-weight:700}
 .hday{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
 .hnote{grid-column:2/4;color:var(--dim);font-size:12.5px;margin-top:-2px}
+
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.tab{appearance:none;cursor:pointer;text-align:left;background:var(--card);color:var(--ink);
+  border:1px solid var(--edge);border-radius:11px;padding:12px 18px;display:flex;flex-direction:column;gap:3px;
+  font-family:inherit;transition:border-color .15s,background .15s}
+.tab:hover{border-color:var(--edge2)}
+.tab:focus-visible{outline:3px solid var(--route);outline-offset:2px}
+.tab.is-on{border-color:var(--route);background:var(--route-soft);box-shadow:inset 0 0 0 1px var(--route)}
+.tt{font-weight:800;font-size:16px;letter-spacing:-.01em}
+.ts{font-size:12.5px;color:var(--dim);font-family:ui-monospace,Menlo,monospace}
+.tab.is-on .ts{color:var(--route)}
+.panel-note{background:var(--card);border:1px solid var(--edge);border-left:3px solid var(--route);
+  border-radius:10px;padding:14px 17px;margin:0 0 26px;max-width:74ch}
+.panel-note p{margin:0;font-size:15px;color:var(--dim)}
+.panel-note b{color:var(--ink)}
+.bk{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:1px}
+.bk.book{background:var(--route);color:#fff}
+.bk.ear{background:var(--surface-alt,var(--paper));color:var(--dim);border:1px solid var(--edge)}
+.bk.ok2{background:var(--terrain-soft);color:var(--terrain)}
+.bk.warn2{background:var(--warn);color:#fff}
+@media(prefers-reduced-motion:reduce){.tab{transition:none}}
 @media(max-width:640px){.day{grid-template-columns:22px 1fr;gap:12px}.rail::before{left:9px}.dot{left:2px}}
 </style>
 <div class="wrap">
 
 <header>
-  <p class="eyebrow">Heber City, Utah to Houston, Texas &middot; five days in September</p>
+  <p class="eyebrow">Heber City, Utah to Houston, Texas &middot; September</p>
   <h1>Five days home, and not one pass above 7,500 feet.</h1>
-  <p class="sub serif" style="font-size:17px">Two routes cover the same ground for the same miles. One of them climbs to 11,312 feet twice. This is the other one.</p>
+  <p class="sub serif" style="font-size:17px">Two routes cover the same ground for the same miles. One of them climbs to 11,312 feet twice. This is the other one &mdash; driven either in five days or, if the mountains ask too much of the first morning, in six.</p>
   <div class="rig">
     <span><b>Rig</b> Grand Design Momentum toy hauler</span>
     <span class="mono">43&prime;1&Prime; long &middot; 13&prime;5&Prime; tall &middot; 20,000 lb</span>
@@ -153,7 +175,7 @@ ol.hardlist li{display:grid;grid-template-columns:22px 1fr auto;gap:4px 10px;ali
 <section>
   <div class="verdict">
     <div class="vc"><p class="vk">Total</p><p class="vv">1,563</p><p class="vn">miles, Heber City to Houston</p></div>
-    <div class="vc"><p class="vk">Longest day</p><p class="vv">6.6 h</p><p class="vn">Thursday, on divided highway the whole way</p></div>
+    <div class="vc"><p class="vk">Longest day</p><p class="vv">6.6 h</p><p class="vn">on the five-day plan. On the six-day it drops to 5.7 h</p></div>
     <div class="vc"><p class="vk">Highest point</p><p class="vv">7,434</p><p class="vn">feet &mdash; Soldier Summit, Utah, on Monday</p></div>
     <div class="vc"><p class="vk">Nights out</p><p class="vv">4</p><p class="vn">home on day five</p></div><div class="vc"><p class="vk">Switchbacks</p><p class="vv">0</p><p class="vn">in 1,563 miles &mdash; the only two 90&deg; turns are interchange ramps</p></div><div class="vc"><p class="vk">Curves over 25&deg;</p><p class="vv">114</p><p class="vn">86 of them on Monday; Wednesday and Friday have 13 between them</p></div>
   </div>
@@ -204,7 +226,23 @@ ol.hardlist li{display:grid;grid-template-columns:22px 1fr auto;gap:4px 10px;ali
 
 <section>
   <h2>Day by day</h2>
-  <p class="sub">Every road in order, and every stretch of 2% grade or steeper &mdash; measured from elevation sampled every mile and a half along the actual route, not estimated.</p>
+  <p class="sub">Two ways to drive it. Same roads, same measured grades &mdash; the difference is where you sleep and whether you get home Friday or Saturday.</p>
+
+  <div class="tabs" role="tablist" aria-label="Choose an itinerary">
+    <button class="tab is-on" role="tab" aria-selected="true" aria-controls="planA" id="tabA">
+      <span class="tt">Five days</span><span class="ts">home Friday &middot; 1,563 mi &middot; longest 6.6 h</span></button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="planB" id="tabB">
+      <span class="tt">Six days</span><span class="ts">home Saturday &middot; 1,496 mi &middot; longest 5.7 h</span></button>
+  </div>
+
+  <div class="panel-note" id="noteA">
+    <p><b>The quicker one.</b> Monday does the whole mountain section in a single 6.2-hour push and you are home Friday evening. Every night has a length-verified park.</p>
+  </div>
+  <div class="panel-note" id="noteB" hidden>
+    <p><b>The easier one.</b> Monday drops from 6.2 hours to 4.1 &mdash; the same Provo Canyon, Soldier Summit and Price Canyon, but parked by mid-afternoon. Nothing all week tops 5.7 hours, and it is <em>67 miles shorter</em> because the last night on US-287 skips the Weatherford detour. The trade is one more night out and two stops that still need a phone call.</p>
+  </div>
+
+  <div id="planA" role="tabpanel" aria-labelledby="tabA">
   
     <article class="day">
       <div class="rail"><span class="dot"></span></div>
@@ -306,6 +344,74 @@ ol.hardlist li{display:grid;grid-template-columns:22px 1fr auto;gap:4px 10px;ali
         </dl>
       </div>
     </article>
+</div>
+  <div id="planB" role="tabpanel" aria-labelledby="tabB" hidden>
+    <article class="day">
+      <div class="rail"><span class="dot"></span></div>
+      <div class="dbody">
+        <div class="dhead"><p class="dwhen">Mon Sep 7</p><h3>Moab</h3>
+          <p class="dnums"><span class="mi">224</span> mi <span class="sep">/</span> <span class="hr">4.1</span> h towing</p></div>
+        <p class="dnote">The mountain day, cut roughly in half. Provo Canyon, Soldier Summit and the Price Canyon descent are all still here &mdash; but you are parked by mid-afternoon instead of early evening.</p>
+        <p class="rlab">Roads, in order</p><ol class="roads"><li><span class="rd">US 189</span><span class="rvia"></span><span class="rmi mono">21 mi</span></li><li><span class="rd">I 15 South</span><span class="rvia"></span><span class="rmi mono">13 mi</span></li><li><span class="rd">East Highway 6</span><span class="rvia"></span><span class="rmi mono">127 mi</span></li><li><span class="rd">I 70 East</span><span class="rvia"></span><span class="rmi mono">23 mi</span></li><li><span class="rd">US 191</span><span class="rvia"></span><span class="rmi mono">26 mi</span></li></ol>
+        <div class="terr"><p class="tlab">Mountain stretches &mdash; <b>4</b></p><div class="tw"><table><thead><tr><th>Where</th><th>What</th><th>Length</th><th>Change</th><th>Grade</th><th>Curves</th></tr></thead><tbody><tr><td class="n">mi 71&ndash;78</td><td><b>US-6 climbing to Soldier Summit</b></td><td class="n">7.5 mi</td><td class="n up">&uarr; 1,204 ft</td><td class="n">3.0% <span class="sm">peak 3.9%</span></td><td class="n">5 curves</td></tr><tr><td class="n">mi 90&ndash;103</td><td><b>Soldier Summit down Price Canyon into Helper</b></td><td class="n">13.6 mi</td><td class="n down">&darr; 1,489 ft</td><td class="n">2.1% <span class="sm">peak 4.2%</span></td><td class="n">17 curves, 2 sharp</td></tr><tr><td class="n">mi 135&ndash;140</td><td><b>below Price, dropping toward Green River</b></td><td class="n">4.6 mi</td><td class="n down">&darr; 512 ft</td><td class="n">2.1% <span class="sm">peak 3.5%</span></td><td class="n"><span class="sm">none</span></td></tr><tr><td class="n">mi 215&ndash;221</td><td><b>US-191 dropping into the Moab valley</b></td><td class="n">6.1 mi</td><td class="n down">&darr; 630 ft</td><td class="n">2.0% <span class="sm">peak 3.4%</span></td><td class="n">2 curves</td></tr></tbody></table></div></div>
+        <dl class="park"><dt>Stop</dt><dd>Moab KOA Holiday, or Green River KOA 50 miles back <span class="bk book">Book this one</span></dd><dt>Note</dt><dd class="fit">the one to book</dd></dl>
+      </div>
+    </article>
+    <article class="day">
+      <div class="rail"><span class="dot"></span></div>
+      <div class="dbody">
+        <div class="dhead"><p class="dwhen">Tue Sep 8</p><h3>Gallup</h3>
+          <p class="dnums"><span class="mi">249</span> mi <span class="sep">/</span> <span class="hr">4.5</span> h towing</p></div>
+        <p class="dnote">The climb out of the Moab valley and up to Monticello, then high desert all the way to Gallup. Two lanes most of the day, but gentle.</p>
+        <p class="rlab">Roads, in order</p><ol class="roads"><li><span class="rd">US 191</span><span class="rvia"></span><span class="rmi mono">53 mi</span></li><li><span class="rd">US 491</span><span class="rvia"></span><span class="rmi mono">186 mi</span></li></ol>
+        <div class="terr"><p class="tlab">Mountain stretches &mdash; <b>4</b></p><div class="tw"><table><thead><tr><th>Where</th><th>What</th><th>Length</th><th>Change</th><th>Grade</th><th>Curves</th></tr></thead><tbody><tr><td class="n">mi 0&ndash;14</td><td><b>climbing south out of Moab</b></td><td class="n">13.8 mi</td><td class="n up">&uarr; 1,233 ft</td><td class="n">1.7% <span class="sm">peak 3.1%</span></td><td class="n">2 curves</td></tr><tr><td class="n">mi 17&ndash;22</td><td><b>toward La Sal Junction</b></td><td class="n">4.5 mi</td><td class="n up">&uarr; 649 ft</td><td class="n">2.7% <span class="sm">peak 4.7%</span></td><td class="n">1 curves</td></tr><tr><td class="n">mi 27&ndash;30</td><td><b>past La Sal Junction</b></td><td class="n">3.0 mi</td><td class="n down">&darr; 259 ft</td><td class="n">1.6% <span class="sm">peak 3.0%</span></td><td class="n"><span class="sm">none</span></td></tr><tr><td class="n">mi 43&ndash;49</td><td><b>the climb up to Monticello</b></td><td class="n">6.1 mi</td><td class="n up">&uarr; 794 ft</td><td class="n">2.5% <span class="sm">peak 4.5%</span></td><td class="n">1 curves</td></tr></tbody></table></div></div>
+        <dl class="park"><dt>Stop</dt><dd>Gallup &mdash; several I-40 parks <span class="bk ear">Play by ear</span></dd><dt>Note</dt><dd class="fit">play it by ear</dd></dl>
+      </div>
+    </article>
+    <article class="day">
+      <div class="rail"><span class="dot"></span></div>
+      <div class="dbody">
+        <div class="dhead"><p class="dwhen">Wed Sep 9</p><h3>Santa Rosa</h3>
+          <p class="dnums"><span class="mi">253</span> mi <span class="sep">/</span> <span class="hr">4.6</span> h towing</p></div>
+        <p class="dnote">Interstate all day. Tijeras Canyon through the Sandias early, then nothing.</p>
+        <p class="rlab">Roads, in order</p><ol class="roads"><li><span class="rd">I 40 East</span><span class="rvia"></span><span class="rmi mono">249 mi</span></li></ol>
+        <div class="terr"><p class="tlab">Mountain stretches &mdash; <b>5</b></p><div class="tw"><table><thead><tr><th>Where</th><th>What</th><th>Length</th><th>Change</th><th>Grade</th><th>Curves</th></tr></thead><tbody><tr><td class="n">mi 135&ndash;140</td><td><b>out of the Rio Grande valley</b></td><td class="n">4.5 mi</td><td class="n down">&darr; 390 ft</td><td class="n">1.6% <span class="sm">peak 2.6%</span></td><td class="n">1 curves, 1 sharp</td></tr><tr><td class="n">mi 156&ndash;166</td><td><b>I-40 climbing Tijeras Canyon through the Sandias</b></td><td class="n">10.6 mi</td><td class="n up">&uarr; 975 ft</td><td class="n">1.7% <span class="sm">peak 2.8%</span></td><td class="n">3 curves</td></tr><tr><td class="n">mi 166&ndash;171</td><td><b>east side of Tijeras Canyon</b></td><td class="n">4.5 mi</td><td class="n down">&darr; 282 ft</td><td class="n">1.2% <span class="sm">peak 2.4%</span></td><td class="n"><span class="sm">none</span></td></tr><tr><td class="n">mi 259&ndash;264</td><td><b>I-40 over Nine Mile Hill, west of Albuquerque</b></td><td class="n">5.0 mi</td><td class="n up">&uarr; 345 ft</td><td class="n">1.3% <span class="sm">peak 2.3%</span></td><td class="n"><span class="sm">none</span></td></tr><tr><td class="n">mi 266&ndash;269</td><td><b>Nine Mile Hill down into the Rio Grande valley</b></td><td class="n">3.0 mi</td><td class="n down">&darr; 475 ft</td><td class="n">3.0% <span class="sm">peak 2.5%</span></td><td class="n">1 curves, 1 sharp</td></tr></tbody></table></div></div>
+        <dl class="park"><dt>Stop</dt><dd>Santa Rosa &mdash; I-40 parks <span class="bk ear">Play by ear</span></dd><dt>Note</dt><dd class="fit">play it by ear</dd></dl>
+      </div>
+    </article>
+    <article class="day">
+      <div class="rail"><span class="dot"></span></div>
+      <div class="dbody">
+        <div class="dhead"><p class="dwhen">Thu Sep 10</p><h3>Amarillo</h3>
+          <p class="dnums"><span class="mi">174</span> mi <span class="sep">/</span> <span class="hr">3.2</span> h towing</p></div>
+        <p class="dnote">The shortest day of the trip. Flat interstate, three hours, done by lunch.</p>
+        <p class="rlab">Roads, in order</p><ol class="roads"><li><span class="rd">I 40 East</span><span class="rvia"></span><span class="rmi mono">171 mi</span></li></ol>
+        <div class="terr flat"><p class="tlab">Mountain stretches &mdash; <b>none.</b> Not one sustained grade of 2% or more in 174 miles.</p></div>
+        <dl class="park"><dt>Stop</dt><dd>Big Texan RV Ranch or Amarillo RV Resort <span class="bk ok2">Verified</span></dd><dt>Note</dt><dd class="fit">90 ft, both verified</dd></dl>
+      </div>
+    </article>
+    <article class="day">
+      <div class="rail"><span class="dot"></span></div>
+      <div class="dbody">
+        <div class="dhead"><p class="dwhen">Fri Sep 11</p><h3>Alvord</h3>
+          <p class="dnums"><span class="mi">284</span> mi <span class="sep">/</span> <span class="hr">5.2</span> h towing</p></div>
+        <p class="dnote">US-287 south-east, flat the whole way. This is the high-wind stretch &mdash; check the forecast.</p>
+        <p class="rlab">Roads, in order</p><ol class="roads"><li><span class="rd">US 287</span><span class="rvia"></span><span class="rmi mono">270 mi</span></li></ol>
+        <div class="terr flat"><p class="tlab">Mountain stretches &mdash; <b>none.</b> Not one sustained grade of 2% or more in 284 miles.</p></div>
+        <dl class="park"><dt>Stop</dt><dd>A Plus RV Park, Alvord &mdash; 70 ft, no margin <span class="bk warn2">Call first</span></dd><dt>Note</dt><dd class="fit">call first, or push to Weatherford</dd></dl>
+      </div>
+    </article>
+    <article class="day last">
+      <div class="rail"><span class="dot"></span></div>
+      <div class="dbody">
+        <div class="dhead"><p class="dwhen">Sat Sep 12</p><h3>Houston</h3>
+          <p class="dnums"><span class="mi">313</span> mi <span class="sep">/</span> <span class="hr">5.7</span> h towing</p></div>
+        <p class="dnote">US-287 into Fort Worth, then I-45 straight home. Flat and downhill to the coast.</p>
+        <p class="rlab">Roads, in order</p><ol class="roads"><li><span class="rd">US 81</span><span class="rvia"></span><span class="rmi mono">39 mi</span></li><li><span class="rd">I 35W TEXpress</span><span class="rvia"></span><span class="rmi mono">8 mi</span></li><li><span class="rd">Spur 280</span><span class="rvia"></span><span class="rmi mono">8 mi</span></li><li><span class="rd">US 287</span><span class="rvia"></span><span class="rmi mono">50 mi</span></li><li><span class="rd">I 45 South</span><span class="rvia"></span><span class="rmi mono">196 mi</span></li></ol>
+        <div class="terr flat"><p class="tlab">Mountain stretches &mdash; <b>none.</b> Not one sustained grade of 2% or more in 313 miles.</p></div>
+        <dl class="park"><dt>Stop</dt><dd>&mdash; home &mdash; </dd><dt>Note</dt><dd class="fit"></dd></dl>
+      </div>
+    </article></div>
 </section>
 
 <section>
@@ -381,4 +487,20 @@ ol.hardlist li{display:grid;grid-template-columns:22px 1fr auto;gap:4px 10px;ali
 <footer>
   Distances and driving times from routed road geometry; towing time calculated at 55&nbsp;mph. Park capacities verified against operator listings and rig-owner reviews. Pass elevations and grades from the accompanying route research.
 </footer>
-</div>
+</div><script>
+(function(){
+  var tA=document.getElementById('tabA'),tB=document.getElementById('tabB');
+  var pA=document.getElementById('planA'),pB=document.getElementById('planB');
+  var nA=document.getElementById('noteA'),nB=document.getElementById('noteB');
+  function pick(a){
+    tA.classList.toggle('is-on',a); tB.classList.toggle('is-on',!a);
+    tA.setAttribute('aria-selected',a); tB.setAttribute('aria-selected',!a);
+    pA.hidden=!a; pB.hidden=a; nA.hidden=!a; nB.hidden=a;
+  }
+  tA.addEventListener('click',function(){pick(true)});
+  tB.addEventListener('click',function(){pick(false)});
+  [tA,tB].forEach(function(t){t.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();var to=(t===tA)?tB:tA;pick(to===tA);to.focus();}
+  })});
+})();
+</script>
